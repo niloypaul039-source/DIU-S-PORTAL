@@ -123,7 +123,7 @@ const Profile: React.FC<ProfileProps> = ({ student, onUpdate }) => {
                 </div>
                 <div>
                    <span className="text-xs text-gray-500">Current Semester</span>
-                   <p className="font-semibold text-gray-800">Fall 2024</p>
+                   <p className="font-semibold text-gray-800">Fall 2025</p>
                 </div>
                 <div>
                    <span className="text-xs text-gray-500">Batch</span>

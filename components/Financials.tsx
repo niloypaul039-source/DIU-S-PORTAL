@@ -4,9 +4,9 @@ import { CreditCard, AlertTriangle, CheckCircle, FileText } from 'lucide-react';
 
 const Financials: React.FC = () => {
   const transactions: Transaction[] = [
-    { id: 'TXN-1001', date: '2024-10-15', description: 'Semester Fee (Fall 2024) - Installment 1', amount: 15000, status: 'Paid' },
-    { id: 'TXN-1002', date: '2024-09-01', description: 'Library Fine', amount: 150, status: 'Paid' },
-    { id: 'TXN-1003', date: '2024-11-01', description: 'Semester Fee (Fall 2024) - Installment 2', amount: 15000, status: 'Pending' },
+    { id: 'TXN-1001', date: '2025-10-15', description: 'Semester Fee (Fall 2025) - Installment 1', amount: 15000, status: 'Paid' },
+    { id: 'TXN-1002', date: '2025-09-01', description: 'Library Fine', amount: 150, status: 'Paid' },
+    { id: 'TXN-1003', date: '2025-11-01', description: 'Semester Fee (Fall 2025) - Installment 2', amount: 15000, status: 'Pending' },
   ];
 
   const totalPaid = transactions.filter(t => t.status === 'Paid').reduce((acc, curr) => acc + curr.amount, 0);
@@ -32,7 +32,7 @@ const Financials: React.FC = () => {
                <span className="text-sm font-medium text-gray-300 uppercase tracking-wide">Total Paid</span>
             </div>
             <p className="text-3xl font-bold">BDT {totalPaid.toLocaleString()}</p>
-            <p className="text-xs text-gray-400 mt-2">Last payment updated on Oct 15, 2024</p>
+            <p className="text-xs text-gray-400 mt-2">Last payment updated on Oct 15, 2025</p>
           </div>
         </div>
 
@@ -52,7 +52,7 @@ const Financials: React.FC = () => {
               <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-xs font-bold transition-colors">
                 Pay Online
               </button>
-              <p className="text-xs text-red-500 font-medium self-center">Due by Nov 01, 2024</p>
+              <p className="text-xs text-red-500 font-medium self-center">Due by Nov 01, 2025</p>
             </div>
           </div>
         </div>

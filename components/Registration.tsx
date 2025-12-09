@@ -47,7 +47,7 @@ const Registration: React.FC = () => {
             <CalendarPlus className="mr-3 text-emerald-600" size={28} />
             Course Pre-Registration
           </h2>
-          <p className="text-sm text-gray-500 mt-1">Spring 2025 Advising Panel</p>
+          <p className="text-sm text-gray-500 mt-1">Spring 2026 Advising Panel</p>
         </div>
         <div className="bg-white px-4 py-2 rounded-lg border border-gray-200 shadow-sm flex items-center space-x-4">
            <div>
@@ -157,7 +157,7 @@ const Registration: React.FC = () => {
            
            <div className="p-4 bg-white border-t border-gray-200">
               <div className="text-xs text-gray-500 mb-2 text-center">
-                 Advising for Spring 2025 closes on <span className="font-bold text-gray-700">Dec 15, 2024</span>
+                 Advising for Spring 2026 closes on <span className="font-bold text-gray-700">Dec 15, 2025</span>
               </div>
            </div>
         </div>

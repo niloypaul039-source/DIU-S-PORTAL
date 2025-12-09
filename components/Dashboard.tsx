@@ -8,7 +8,7 @@ import {
   Tooltip, 
   ResponsiveContainer 
 } from 'recharts';
-import { Clock, Calendar, AlertCircle, Book, Wallet, GraduationCap, MapPin, QrCode, ArrowUpRight, Bot, Phone, Mail, UserCheck } from 'lucide-react';
+import { Clock, AlertCircle, Book, Wallet, GraduationCap, MapPin, QrCode, ArrowUpRight, Bot, Phone, Mail, UserCheck } from 'lucide-react';
 import { Student, Notice, Course } from '../types';
 
 interface DashboardProps {
@@ -71,7 +71,7 @@ const Dashboard: React.FC<DashboardProps> = ({ student, notices, todayClasses, g
                 </div>
                 <div className="flex justify-between text-sm border-b border-gray-200 pb-2 pt-2">
                   <span className="text-gray-500">Validity</span>
-                  <span className="font-semibold text-emerald-600">Dec 2026</span>
+                  <span className="font-semibold text-emerald-600">Dec 2027</span>
                 </div>
                 <div className="flex justify-between text-sm pt-2">
                   <span className="text-gray-500">Status</span>
@@ -123,7 +123,7 @@ const Dashboard: React.FC<DashboardProps> = ({ student, notices, todayClasses, g
             <div className="space-y-4">
               <div className="bg-gradient-to-r from-emerald-50 to-white p-4 rounded-lg border border-emerald-100 flex justify-between items-center">
                 <div>
-                  <p className="text-xs text-gray-500 mb-0.5">Payable (Fall '24)</p>
+                  <p className="text-xs text-gray-500 mb-0.5">Payable (Fall '25)</p>
                   <p className="text-2xl font-bold text-gray-900">৳ 15,000</p>
                 </div>
                 <div className="h-10 w-10 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600">

@@ -123,7 +123,7 @@ const Login: React.FC<LoginProps> = ({ onLogin, error }) => {
       </div>
       
       <div className="absolute bottom-4 text-center text-white/40 text-xs">
-        &copy; 2024 Daffodil International University. All rights reserved.
+        &copy; 2025 Daffodil International University. All rights reserved.
       </div>
     </div>
   );

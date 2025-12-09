@@ -42,9 +42,9 @@ const initialStudentData: Student = {
 };
 
 const mockNotices: Notice[] = [
-  { id: '1', title: 'Mid-term Exam Schedule Published for Fall 2024', date: 'Oct 24', type: 'academic' },
-  { id: '2', title: 'Online Registration for Spring 2025 is now Open', date: 'Oct 22', type: 'admin' },
-  { id: '3', title: 'Tech Fest 2024 - Call for Papers and Projects', date: 'Oct 20', type: 'event' },
+  { id: '1', title: 'Mid-term Exam Schedule Published for Fall 2025', date: 'Oct 24', type: 'academic' },
+  { id: '2', title: 'Online Registration for Spring 2026 is now Open', date: 'Oct 22', type: 'admin' },
+  { id: '3', title: 'Tech Fest 2025 - Call for Papers and Projects', date: 'Oct 20', type: 'event' },
   { id: '4', title: 'Library Renovation Notice: Closed on Friday', date: 'Oct 18', type: 'admin' },
 ];
 
@@ -56,26 +56,26 @@ const mockCourses: Course[] = [
 ];
 
 const mockGpaHistory = [
-  { semester: 'Spring 23', gpa: 3.65 },
-  { semester: 'Summer 23', gpa: 3.75 },
-  { semester: 'Fall 23', gpa: 3.80 },
-  { semester: 'Spring 24', gpa: 3.72 },
-  { semester: 'Summer 24', gpa: 3.85 },
-  { semester: 'Fall 24', gpa: 3.90 },
+  { semester: 'Spring 24', gpa: 3.65 },
+  { semester: 'Summer 24', gpa: 3.75 },
+  { semester: 'Fall 24', gpa: 3.80 },
+  { semester: 'Spring 25', gpa: 3.72 },
+  { semester: 'Summer 25', gpa: 3.85 },
+  { semester: 'Fall 25', gpa: 3.90 },
 ];
 
 const initialAssignments: Assignment[] = [
-  { id: '1', courseCode: 'SWE321', title: 'Requirement Analysis Doc', description: 'Submit the SRS document for your semester project including Use Cases.', dueDate: 'Nov 10, 2024', status: 'Pending', totalMarks: 20 },
-  { id: '2', courseCode: 'CSE311', title: 'SQL Practice Lab', description: 'Complete the complex join queries from Lab Sheet 4.', dueDate: 'Nov 05, 2024', status: 'Submitted', totalMarks: 10, obtainedMarks: 9.5, submissionDate: 'Nov 04' },
-  { id: '3', courseCode: 'MAT201', title: 'Matrix Transformation', description: 'Solve problems 1-15 from Chapter 4.', dueDate: 'Nov 12, 2024', status: 'Pending', totalMarks: 15 },
-  { id: '4', courseCode: 'ENG201', title: 'Presentation Slides', description: 'Upload slides for final presentation.', dueDate: 'Oct 28, 2024', status: 'Late', totalMarks: 10 },
+  { id: '1', courseCode: 'SWE321', title: 'Requirement Analysis Doc', description: 'Submit the SRS document for your semester project including Use Cases.', dueDate: 'Nov 10, 2025', status: 'Pending', totalMarks: 20 },
+  { id: '2', courseCode: 'CSE311', title: 'SQL Practice Lab', description: 'Complete the complex join queries from Lab Sheet 4.', dueDate: 'Nov 05, 2025', status: 'Submitted', totalMarks: 10, obtainedMarks: 9.5, submissionDate: 'Nov 04' },
+  { id: '3', courseCode: 'MAT201', title: 'Matrix Transformation', description: 'Solve problems 1-15 from Chapter 4.', dueDate: 'Nov 12, 2025', status: 'Pending', totalMarks: 15 },
+  { id: '4', courseCode: 'ENG201', title: 'Presentation Slides', description: 'Upload slides for final presentation.', dueDate: 'Oct 28, 2025', status: 'Late', totalMarks: 10 },
 ];
 
 const initialQuizzes: Quiz[] = [
-  { id: '1', courseCode: 'SWE321', title: 'Quiz 2: Agile Methodologies', date: 'Nov 15, 2024', duration: '20 mins', totalMarks: 15, status: 'Upcoming' },
-  { id: '2', courseCode: 'CSE311', title: 'Quiz 1: ER Diagrams', date: 'Oct 10, 2024', duration: '30 mins', totalMarks: 20, status: 'Completed', obtainedMarks: 18 },
-  { id: '3', courseCode: 'ENG201', title: 'Vocabulary Test', date: 'Oct 05, 2024', duration: '15 mins', totalMarks: 10, status: 'Completed', obtainedMarks: 8 },
-  { id: '4', courseCode: 'MAT201', title: 'Pop Quiz: Vectors', date: 'Sep 25, 2024', duration: '15 mins', totalMarks: 10, status: 'Missed', obtainedMarks: 0 },
+  { id: '1', courseCode: 'SWE321', title: 'Quiz 2: Agile Methodologies', date: 'Nov 15, 2025', duration: '20 mins', totalMarks: 15, status: 'Upcoming' },
+  { id: '2', courseCode: 'CSE311', title: 'Quiz 1: ER Diagrams', date: 'Oct 10, 2025', duration: '30 mins', totalMarks: 20, status: 'Completed', obtainedMarks: 18 },
+  { id: '3', courseCode: 'ENG201', title: 'Vocabulary Test', date: 'Oct 05, 2025', duration: '15 mins', totalMarks: 10, status: 'Completed', obtainedMarks: 8 },
+  { id: '4', courseCode: 'MAT201', title: 'Pop Quiz: Vectors', date: 'Sep 25, 2025', duration: '15 mins', totalMarks: 10, status: 'Missed', obtainedMarks: 0 },
 ];
 
 function App() {

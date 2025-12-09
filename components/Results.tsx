@@ -3,9 +3,9 @@ import { Trophy, Download, ChevronRight } from 'lucide-react';
 
 const Results: React.FC = () => {
   const semesters = [
-    { name: 'Fall 2024', gpa: 3.85, credits: 15, status: 'Completed' },
-    { name: 'Summer 2024', gpa: 3.70, credits: 12, status: 'Completed' },
-    { name: 'Spring 2024', gpa: 3.92, credits: 16, status: 'Completed' },
+    { name: 'Fall 2025', gpa: 3.90, credits: 15, status: 'Completed' },
+    { name: 'Summer 2025', gpa: 3.85, credits: 12, status: 'Completed' },
+    { name: 'Spring 2025', gpa: 3.72, credits: 16, status: 'Completed' },
   ];
 
   const currentResults = [
@@ -29,7 +29,7 @@ const Results: React.FC = () => {
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
             <div className="p-5 border-b border-gray-100 bg-gray-50 flex justify-between items-center">
-              <h3 className="font-bold text-gray-800">Current Semester (Fall 2024)</h3>
+              <h3 className="font-bold text-gray-800">Current Semester (Fall 2025)</h3>
               <span className="text-xs font-bold text-gray-400 uppercase tracking-wide">Provisional</span>
             </div>
             <table className="w-full text-left">

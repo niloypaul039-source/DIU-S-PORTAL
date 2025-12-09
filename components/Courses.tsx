@@ -12,7 +12,7 @@ const Courses: React.FC<CoursesProps> = ({ courses }) => {
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-gray-900">Enrolled Courses</h2>
         <span className="text-sm bg-emerald-100 text-emerald-800 py-1 px-3 rounded-full font-medium">
-          Fall 2024
+          Fall 2025
         </span>
       </div>
       
