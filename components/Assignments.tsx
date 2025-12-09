@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Assignment } from '../types';
-import { FileText, Calendar, Upload, CheckCircle, Clock, AlertCircle } from 'lucide-react';
+import { FileText, Calendar, Upload, CheckCircle, Clock, AlertCircle, X, File, UploadCloud, Loader2 } from 'lucide-react';
 
 interface AssignmentsProps {
   assignments: Assignment[];
+  onSubmit: (id: string, file: File) => void;
 }
 
-const Assignments: React.FC<AssignmentsProps> = ({ assignments }) => {
+const Assignments: React.FC<AssignmentsProps> = ({ assignments, onSubmit }) => {
+  const [selectedAssignment, setSelectedAssignment] = useState<Assignment | null>(null);
+  const [dragActive, setDragActive] = useState(false);
+  const [file, setFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
   const pendingAssignments = assignments.filter(a => a.status === 'Pending' || a.status === 'Late');
   const submittedAssignments = assignments.filter(a => a.status === 'Submitted');
 
@@ -19,8 +25,57 @@ const Assignments: React.FC<AssignmentsProps> = ({ assignments }) => {
     }
   };
 
+  const handleDrag = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setDragActive(true);
+    } else if (e.type === "dragleave") {
+      setDragActive(false);
+    }
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setDragActive(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      setFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.target.files && e.target.files[0]) {
+      setFile(e.target.files[0]);
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!selectedAssignment || !file) return;
+    
+    setIsSubmitting(true);
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    onSubmit(selectedAssignment.id, file);
+    setIsSubmitting(false);
+    closeModal();
+  };
+
+  const openModal = (assignment: Assignment) => {
+    setSelectedAssignment(assignment);
+    setFile(null);
+  };
+
+  const closeModal = () => {
+    setSelectedAssignment(null);
+    setFile(null);
+    setIsSubmitting(false);
+  };
+
   return (
-    <div className="space-y-8 animate-fade-in">
+    <div className="space-y-8 animate-fade-in relative">
       {/* Header Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-orange-50 border border-orange-100 p-5 rounded-xl flex items-center space-x-4">
@@ -74,7 +129,10 @@ const Assignments: React.FC<AssignmentsProps> = ({ assignments }) => {
                   
                   <div className="flex flex-col items-end space-y-3 w-full md:w-auto">
                     <div className="text-sm font-semibold text-gray-500">Total Marks: {assignment.totalMarks}</div>
-                    <button className="w-full md:w-auto flex items-center justify-center space-x-2 bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-lg transition-colors text-sm font-bold shadow-sm">
+                    <button 
+                      onClick={() => openModal(assignment)}
+                      className="w-full md:w-auto flex items-center justify-center space-x-2 bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 rounded-lg transition-colors text-sm font-bold shadow-sm"
+                    >
                       <Upload size={16} />
                       <span>Submit Work</span>
                     </button>
@@ -103,6 +161,7 @@ const Assignments: React.FC<AssignmentsProps> = ({ assignments }) => {
                 <th className="px-6 py-4 font-semibold">Course</th>
                 <th className="px-6 py-4 font-semibold">Assignment</th>
                 <th className="px-6 py-4 font-semibold">Status</th>
+                <th className="px-6 py-4 font-semibold">Submission Date</th>
                 <th className="px-6 py-4 font-semibold text-right">Marks</th>
               </tr>
             </thead>
@@ -112,12 +171,19 @@ const Assignments: React.FC<AssignmentsProps> = ({ assignments }) => {
                   <td className="px-6 py-4 font-medium font-mono text-emerald-700">{assignment.courseCode}</td>
                   <td className="px-6 py-4">
                     <div className="font-bold text-gray-900">{assignment.title}</div>
-                    <div className="text-xs text-gray-400">{assignment.dueDate}</div>
+                    {assignment.submittedFile && (
+                      <div className="flex items-center text-xs text-gray-400 mt-1">
+                        <File size={10} className="mr-1"/> {assignment.submittedFile}
+                      </div>
+                    )}
                   </td>
                   <td className="px-6 py-4">
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide ${getStatusColor(assignment.status)}`}>
                       {assignment.status}
                     </span>
+                  </td>
+                  <td className="px-6 py-4 text-gray-500">
+                    {assignment.submissionDate || '-'}
                   </td>
                   <td className="px-6 py-4 text-right">
                     {assignment.obtainedMarks !== undefined ? (
@@ -132,6 +198,107 @@ const Assignments: React.FC<AssignmentsProps> = ({ assignments }) => {
           </table>
         </div>
       </div>
+
+      {/* Submission Modal */}
+      {selectedAssignment && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-60 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white rounded-xl shadow-2xl max-w-lg w-full overflow-hidden flex flex-col max-h-[90vh]">
+            <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+              <div>
+                 <h3 className="font-bold text-gray-900 text-lg">Submit Assignment</h3>
+                 <p className="text-xs text-gray-500 mt-1">{selectedAssignment.title} • {selectedAssignment.courseCode}</p>
+              </div>
+              <button 
+                onClick={closeModal}
+                className="text-gray-400 hover:text-gray-600 p-2 hover:bg-gray-200 rounded-full transition-colors"
+                disabled={isSubmitting}
+              >
+                <X size={20} />
+              </button>
+            </div>
+            
+            <div className="p-6 space-y-4">
+               <div 
+                 className={`
+                   border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center text-center transition-colors
+                   ${dragActive ? 'border-emerald-500 bg-emerald-50' : 'border-gray-300 hover:bg-gray-50'}
+                 `}
+                 onDragEnter={handleDrag} 
+                 onDragLeave={handleDrag} 
+                 onDragOver={handleDrag} 
+                 onDrop={handleDrop}
+               >
+                 {!file ? (
+                   <>
+                     <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4">
+                       <UploadCloud size={24} />
+                     </div>
+                     <p className="text-sm font-semibold text-gray-800">Click to upload or drag and drop</p>
+                     <p className="text-xs text-gray-500 mt-1">PDF, DOCX, ZIP up to 10MB</p>
+                     <input 
+                        type="file" 
+                        className="hidden" 
+                        id="file-upload"
+                        onChange={handleChange}
+                     />
+                     <label htmlFor="file-upload" className="absolute inset-0 cursor-pointer w-full h-full opacity-0"></label>
+                   </>
+                 ) : (
+                    <div className="flex items-center space-x-3 bg-emerald-50 p-3 rounded-lg border border-emerald-200">
+                       <File size={24} className="text-emerald-600" />
+                       <div className="text-left">
+                          <p className="text-sm font-bold text-gray-800">{file.name}</p>
+                          <p className="text-xs text-gray-500">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                       </div>
+                       <button onClick={() => setFile(null)} className="p-1 hover:bg-emerald-200 rounded text-emerald-700">
+                          <X size={16} />
+                       </button>
+                    </div>
+                 )}
+               </div>
+
+               <div className="space-y-2">
+                 <label className="text-xs font-bold text-gray-600 uppercase">Comments (Optional)</label>
+                 <textarea 
+                   className="w-full p-3 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none resize-none"
+                   rows={3}
+                   placeholder="Add any additional notes for the instructor..."
+                 />
+               </div>
+            </div>
+
+            <div className="p-6 border-t border-gray-100 bg-gray-50 flex justify-end space-x-3">
+              <button 
+                onClick={closeModal}
+                className="px-5 py-2.5 rounded-lg border border-gray-300 text-gray-700 font-bold text-sm hover:bg-gray-100 transition-colors"
+                disabled={isSubmitting}
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleSubmit}
+                disabled={!file || isSubmitting}
+                className={`
+                  px-5 py-2.5 rounded-lg text-white font-bold text-sm flex items-center space-x-2 transition-colors shadow-sm
+                  ${!file || isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-emerald-600 hover:bg-emerald-700'}
+                `}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 size={16} className="animate-spin" />
+                    <span>Submitting...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Submit Assignment</span>
+                    <CheckCircle size={16} />
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

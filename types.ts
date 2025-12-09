@@ -11,6 +11,19 @@ export interface Student {
   email?: string;
   phone?: string;
   address?: string;
+  dob?: string;
+  gender?: string;
+  bloodGroup?: string;
+  mentor?: Mentor;
+}
+
+export interface Mentor {
+  name: string;
+  designation: string;
+  department: string;
+  email: string;
+  phone: string;
+  imageUrl: string;
 }
 
 export interface Course {
@@ -21,6 +34,27 @@ export interface Course {
   instructor: string;
   room: string;
   color: string;
+}
+
+export interface OfferedCourse {
+  id: string;
+  code: string;
+  title: string;
+  section: string;
+  credits: number;
+  instructor: string;
+  schedule: string;
+  seats: number;
+  taken: number;
+}
+
+export interface BusSchedule {
+  id: string;
+  route: string;
+  busNumber: string;
+  departureTime: string;
+  type: 'To Campus' | 'From Campus';
+  stoppages: string[];
 }
 
 export interface Notice {
@@ -60,6 +94,8 @@ export interface Assignment {
   totalMarks: number;
   obtainedMarks?: number;
   description: string;
+  submissionDate?: string;
+  submittedFile?: string;
 }
 
 export interface Quiz {
